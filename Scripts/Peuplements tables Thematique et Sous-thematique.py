@@ -10,7 +10,6 @@ import psycopg2
 from password import *
 import pandas as pd
 import csv
-import time
 
 class Ressource():
     
@@ -73,120 +72,10 @@ class Ressource():
                         new_element = element.replace("_"," ")
                         self.thematique.append(new_element.title())
                         Ressource.extract(self,element,i,new_path)     
-                        
-    def data_sans_doublons_titre(self):
-        df = pd.read_csv('C:/Users/Sébastien/Desktop/Projet BDDR 2/Kaggle/metadata.csv',low_memory=False)
-        df.drop_duplicates(subset='doi',inplace=True)
-        df.to_csv('C:/Users/Sébastien/Desktop/data_sans_doublons_titre.csv',index=False)
-                        
-                        
-    def titre(self):
-        self.path = r"C:/Users/Sébastien/Desktop/data_sans_doublons_titre.csv"
-        with open (self.path , encoding = "utf8") as file:
-            reader = csv.reader(file)
-            L = []
-            for ligne in reader :
-                L.append(ligne)
-                
-            indice_colonne = 0
-            while(L[0][indice_colonne] != 'title'):
-                indice_colonne += 1
-            
-            for k in range (1,len(L)):
-                self.liste_titre.append(L[k][indice_colonne])
-        
-        self.path = r"C:/Users/Sébastien/Desktop/Projet BDDR 2/Kaggle/target_tables"
-        liste_dossiers = os.listdir(self.path)
-        for i in range(1,len(liste_dossiers)):
-            liste_dossiers_2 = os.listdir(self.path + '/' + str(liste_dossiers[i]))
-            for j in range(len(liste_dossiers_2)):  
-                if(liste_dossiers_2[j][-1] == "v"):
-                    with open(self.path + '/' + str(liste_dossiers[i]) + '/' + str(liste_dossiers_2[j]) , encoding = "utf8") as file:
-                        reader = csv.reader(file)
-                        L = []
-                        for ligne in reader :
-                            L.append(ligne)
-                        indice_colonne = 0
-                        while(L[0][indice_colonne] != 'Study'):
-                            indice_colonne += 1
-                        for k in range (1,len(L)):
-                            self.liste_titre.append(L[k][indice_colonne])
-                        
-        self.liste_titre = list(set(self.liste_titre))
-                        
-        return len(self.liste_titre)
-    
-    def date(self):
-        compteur = 0
-        self.path = r"C:/Users/Sébastien/Desktop/data_sans_doublons_titre.csv"
-        liste_titres_traversés = []
-        with open (self.path , encoding = "utf8") as file:
-            reader = csv.reader(file)
-            L = []
-            for ligne in reader :
-                L.append(ligne)
-                
-            indice_colonne = 0
-            while(L[0][indice_colonne] != 'publish_time'):
-                indice_colonne += 1
-            
-            indice_titre = 0
-            while(L[0][indice_titre] != 'title'):
-                indice_titre += 1
-            
-            for k in range (1,len(L)):
-                if (L[k][indice_titre] in self.liste_titre and L[k][indice_titre] not in liste_titres_traversés):
-                    liste_titres_traversés.append(L[k][indice_colonne])
-                    compteur += 1
-                    print(compteur)
-                    self.liste_date.append(L[k][indice_colonne])
-        
-        self.path = r"C:/Users/Sébastien/Desktop/Projet BDDR 2/Kaggle/target_tables"
-        liste_dossiers = os.listdir(self.path)
-        for i in range(1,len(liste_dossiers)):
-            liste_dossiers_2 = os.listdir(self.path + '/' + str(liste_dossiers[i]))
-            for j in range(len(liste_dossiers_2)):  
-                if(liste_dossiers_2[j][-1] == "v"):
-                    
-                    with open(self.path + '/' + str(liste_dossiers[i]) + '/' + str(liste_dossiers_2[j]) , encoding = "utf8") as file:
-                        reader = csv.reader(file)
-                        
-                        L = []
-                        for ligne in reader :
-                            L.append(ligne)
-                            
-                        indice_colonne = 0
-                        while(L[0][indice_colonne] != 'Date' and L[0][indice_colonne] != 'Date Published'):
-                            indice_colonne += 1
-                            
-                        indice_titre = 0
-                        while(L[0][indice_titre] != 'title'):
-                            indice_titre += 1
-                            
-                        for k in range (1,len(L)):
-                            if (L[k][indice_titre] in self.liste_titre and L[k][indice_titre] not in liste_titres_traversés):
-                                liste_titres_traversés.append(L[k][indice_colonne])
-                                compteur += 1 
-                                print(compteur)
-                                self.liste_date.append(L[k][indice_colonne])
-                        
-        return len(self.liste_date)
-            
-    def creer(self):
-        file = open("monfichier.txt", "w")
-        for i in range(len(self.thematique)):
-            file.write(f"{self.thematique[i]}\n \n")
-            for j in range(len(self.sous_thematique[i])):
-                file.write(f"{self.sous_thematique[i][j]}\n")
-            file.write(f"\n")
-        file.close()         
+                      
         
 R = Ressource()
 R.tri()
-R.data_sans_doublons_titre()
-print(R.titre())
-#print(R.date())
-#R.creer()
 
 compteur_de_la_sous_thematique = 0
 
@@ -222,17 +111,7 @@ for i in range (len(R.thematique)):
                     (%s,%s,%s)
                     """,
                     (compteur_de_la_sous_thematique,i+1,R.sous_thematique[i][j]))
-
-cur.execute("SELECT * FROM Thematique;")
-cur.execute("SELECT * FROM Sous_Thematique;")
-
-df = pd.read_sql('SELECT * FROM Thematique', conn)
-print(df)
-
-df = pd.read_sql('SELECT * FROM Sous_Thematique', conn)
-print(df)
-
-
+        
 cur.close()
 conn.commit()
 conn.close()
