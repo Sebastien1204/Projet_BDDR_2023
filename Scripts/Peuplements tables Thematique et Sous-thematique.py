@@ -8,8 +8,6 @@ Created on Wed Feb 22 18:49:49 2023
 import os
 import psycopg2
 from password import *
-import pandas as pd
-import csv
 
 class Ressource():
     
