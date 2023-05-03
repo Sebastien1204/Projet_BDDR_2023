@@ -1,4 +1,5 @@
-NOËL Sébastien et BEQUET Clément - PROJET BDDR
+                       NOËL Sébastien et BEQUET Clément - PROJET BDDR
+                       
 
 Pour lancer l'application, il vous suffit de lancer les commandes suivantes dans le dossier Projet : 
 
