@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>choix histogramme article</title>
+    <style> 
+      #overlay{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+
+      }
+
+      #un_bouton{
+          margin:0 auto;
+          display: block;
+          text-align: center;
+          font-weight: 700;
+          text-decoration: none;
+          width: 120px;
+          padding: 7px 10px;
+      }   
+  </style>
+  </head>
+  <div id="overlay">
+    <body>
+      <h2>Quel histogramme souhaitez-vous afficher ?</h2>
+      <h2></h2>
+      <button id="un_bouton" onclick="window.location.href = 'http://127.0.0.1:8000/choix_date_histogramme';">Date</button>
+      <h2></h2>
+      <button id="un_bouton" onclick="window.location.href = 'http://127.0.0.1:8000/choix_semaine_histogramme';">Semaine</button>
+      <h2></h2>
+      <button id="un_bouton" onclick="window.location.href = 'http://127.0.0.1:8000/choix_mois_histogramme';">Mois</button>
+      <h2></h2>
+      <button id="un_bouton" onclick="window.location.href = 'http://127.0.0.1:8000/choix_annee_histogramme';">Année</button>
+      <h2></h2>
+      <button id="un_bouton" onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+      
+    </body>
+  </div>
+</html>

@@ -1,0 +1,255 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>choix histogramme institution</title>
+    <style> 
+        #overlay{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #overlay2{
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #un_bouton{
+            margin:0 auto;
+            display: block;
+            text-align: center;
+            font-weight: 700;
+            text-decoration: none;
+            width: 120px;
+            padding: 7px 10px;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', "Nombre d'articles");
+        data.addRows([
+        ['University of California',1207],
+['Chinese Academy of Sciences',642],
+['University of Oxford',635],
+['University of Toronto',546],
+['Harvard Medical School',537],
+['Huazhong University of Science and Technology',509],
+['Imperial College London',471],
+['University College London',469],
+['University of Washington',456],
+['National Institutes of Health',441],
+['University of Pennsylvania',425],
+['Stanford University',397],
+['University of Michigan',389],
+['University of Cambridge',367],
+['Mayo Clinic',363],
+['The University of Hong Kong',345],
+['Fudan University',338],
+['Tehran University of Medical Sciences',301],
+['Sichuan University',301],
+['University of Minnesota',282],
+['University of Alberta',272],
+['Massachusetts General Hospital',266],
+['Columbia University',263],
+['nouveau_texte',260],
+['Zhejiang University',260],
+['Monash University',255],
+['Sapienza University of Rome',251],
+['University of British Columbia',248],
+['Shahid Beheshti University of Medical Sciences',243],
+['McGill University',235],
+['The Chinese University of Hong Kong',232],
+['University of Florida',231],
+['National University of Singapore',230],
+['King Saud University',228],
+['Wuhan University',227],
+['University of Edinburgh',226],
+['Cornell University',223],
+['CNRS',223],
+['Capital Medical University',218],
+['University of Southern California',216],
+['McMaster University',216],
+['Tsinghua University',213],
+['The Ohio State University',213],
+['University of Pittsburgh',211],
+['Central South University',209],
+['Utrecht University',207],
+['Peking University',204],
+['Johns Hopkins University School of Medicine',204],
+['University of Milan',202],
+['University of Calgary',202],
+['Ministry of Health',195],
+['Russian Academy of Sciences',194],
+['Northwestern University',194],
+['University of Birmingham',193],
+['University of Bristol',192],
+['All India Institute of Medical Sciences',189],
+['University of Maryland',188],
+['University of Zurich',185],
+['The University of Tokyo',184],
+['Stanford University School of Medicine',184],
+['The University of Sydney',183],
+['University of Liverpool',181],
+['Emory University',181],
+['Sun Yat-sen University',179],
+['Baylor College of Medicine',176],
+['University of North Carolina at Chapel Hill',173],
+['Yale University',171],
+['Shiraz University of Medical Sciences',170],
+['Texas A&M University',170],
+['University of Amsterdam',167],
+['Chinese Academy of Agricultural Sciences',165],
+['Shanghai Jiao Tong University',165],
+['University of Copenhagen',165],
+['University of California San Diego',164],
+['Karolinska Institutet',164],
+['University of Padova',158],
+['University of Leeds',157],
+['Emory University School of Medicine',157],
+['Tel Aviv University',155],
+['Medical University of Vienna',155],
+['University of Ottawa',155],
+['Massachusetts Institute of Technology',154],
+['Johns Hopkins University',152],
+['University of Georgia',151],
+['Harvard University',151],
+['The University of Queensland',149],
+['Vanderbilt University Medical Center',149],
+['University of Bern',148],
+['Yale University School of Medicine',147],
+['Seoul National University',147],
+['Ghent University',146],
+['Washington University School of Medicine',146],
+['Purdue University',145],
+['Arizona State University',145],
+['University of Wisconsin-Madison',144],
+['King Abdulaziz University',142],
+['Huazhong Agricultural University',141],
+['University of Southampton',140],
+['University of Melbourne',139],
+['University of São Paulo',138],
+['Johns Hopkins Bloomberg School of Public Health',138],
+['University of Glasgow',138],
+['Boston University',138],
+['Mahidol University',138],
+['University of Bologna',138],
+['National Taiwan University',136],
+['Michigan State University',136],
+['Hamad Medical Corporation',136],
+['National and Kapodistrian University of Athens',135],
+['New York University',131],
+['Chulalongkorn University',131],
+['University of California San Francisco',130],
+['Duke University',130],
+['University College Dublin',129],
+['Nanyang Technological University',129],
+['University of Manitoba',129],
+['University of Manchester',129],
+['University of Helsinki',128],
+['University of Utah',127],
+['University of Alabama at Birmingham',126],
+['University of Warwick',124],
+['University of Iowa',123],
+['Uppsala University',122],
+['University of Nottingham',122],
+['Cairo University',122],
+['National Institute of Infectious Diseases',121],
+['Southern Medical University',121],
+['The Hong Kong Polytechnic University',121],
+['Leiden University Medical Center',120],
+['Shandong University',119],
+['Cardiff University',119],
+['University of Illinois at Chicago',119],
+['University of Sydney',118],
+['University of Illinois at Urbana-Champaign',118],
+['Northeastern University',118],
+['Yale School of Medicine',117],
+['University of New South Wales',116],
+['University of London',115],
+['University of Waterloo',113],
+['University of Florence',113],
+['University of KwaZulu-Natal',113],
+['Universidade de São Paulo',113],
+['University of the Witwatersrand',112],
+['Cleveland Clinic',111],
+['Kyoto University',111],
+['University of Cape Town',111],
+['The University of Melbourne',110],
+['University of Saskatchewan',110],
+['University of Verona',110],
+['University of Groningen',109],
+['University of Padua',109],
+['University of Arizona',109],
+['KU Leuven',108],
+['University of Freiburg',107],
+['Université de Paris',107],
+['University of Guelph',106],
+['University Hospital',106],
+['The Scripps Research Institute',106],
+['University of Geneva',106],
+['Iowa State University',106],
+['Lund University',106],
+['University of Pisa',104],
+['University of Naples Federico II',104],
+['University of Texas Medical Branch',104],
+['China Agricultural University',104],
+['University of Maryland School of Medicine',103],
+['University of Catania',103],
+['Georgia State University',103],
+['University of Virginia',102],
+['Deakin University',102],
+['University of Pavia',102],
+['Indian Institute of Science',101],
+['University of Chicago',100],
+['Qatar University',99],
+['Northwestern University Feinberg School of Medicine',98],
+['Jilin University',98],
+['Dalhousie University',98],
+['Hokkaido University',97],
+['Carnegie Mellon University',97],
+['Columbia University Irving Medical Center',97],
+['Newcastle University',97],
+['Osaka University',96],
+['Tabriz University of Medical Sciences',96],
+['York University',96],
+['Hong Kong Special Administrative Region',94],
+['University of Wisconsin',93],
+['Institut Pasteur',93],
+['Colorado State University',93],
+['Renmin Hospital of Wuhan University',93]
+        ]);
+
+        var options = { 'title':'Histogramme des institutions',
+                        'legend':'left',
+                        'width':1500,
+                        'height':600};
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="overlay">
+        <div id="chart_div"></div>
+    </div>
+    <div id="overlay2">
+        <button onclick="window.location.href = 'http://127.0.0.1:8000/accueil_recherche_institutions';">Retour au choix de recherche </button>
+        <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+    </div>
+  </body>
+</html>

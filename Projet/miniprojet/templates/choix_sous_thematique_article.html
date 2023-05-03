@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>recherche article par sous-thématique</title>
+  </head>
+  <body>
+    <h2>Recherche d'un article précis par sa sous-thématique.</h2>
+    {% if rien %}
+    Aucun article n'est enregistré
+    {% else %}
+    <form action = "{% url 'index29' %}", method="get", name="search_form">
+      {% csrf_token %}
+      <div>
+        <label for="sous_thematique">Nom de la sous-thématique : </label>
+        <input type="text" name="sous_thematique">
+        {{form.sous_thematique}}
+      </div>
+      <h2> </h2>
+      <button type="submit" value="Rechercher">Rechercher</button>
+    </form>
+    {% endif %}
+    <h6> </h6>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000/accueil_recherche_article';">Retour au choix de recherche </button>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000/accueil_article';">Retour à la page d'accueil des articles </button>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+  </body>
+</html>

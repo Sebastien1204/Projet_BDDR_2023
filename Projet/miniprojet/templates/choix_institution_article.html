@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>recherche article par institution</title>
+  </head>
+  <body>
+    <h2>Recherche d'un article précis par son institution.</h2>
+    {% if rien %}
+    Aucun article n'est enregistré
+    {% else %}
+    <form action = "{% url 'index33' %}", method="get", name="search_form">
+      {% csrf_token %}
+      <div>
+        <label for="institution">Nom de l'institution : </label>
+        <input type="text" name="institution">
+        {{form.institution}}
+      </div>
+      <h2> </h2>
+      <button type="submit" value="Rechercher">Rechercher</button>
+    </form>
+    {% endif %}
+    <h6> </h6>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000/accueil_recherche_article';">Retour au choix de recherche </button>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000/accueil_article';">Retour à la page d'accueil des articles </button>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+  </body>
+</html>
