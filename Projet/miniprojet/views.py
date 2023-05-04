@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 from miniprojet.models import thematique, sous_thematique, auteur, article, journaux, dates, laboratoires, institutions
+from datetime import datetime, timedelta
 
 
 def index(request):
@@ -353,3 +354,46 @@ def index52(request):
         liste.append(a.quantite[i])
         L.append(liste)"""
     return render(request, 'choix_histogramme_journal.html', {'L' : L})
+
+def index53(request):
+    all_dates = dates.objects.all()
+    dates_qs = all_dates
+    for i in dict(request.GET):
+        if i == 'date_debut':
+            inf = request.GET.get('date_debut')
+        if i == 'date_fin':
+            sup = request.GET.get('date_fin')
+
+    A = pd.Series(self.liste_date).value_counts()
+    L = []
+    date_sup = datetime.strptime(sup,"%Y-%m-%d")
+    date_inf = datetime.strptime(inf,"%Y-%m-%d")
+    if date_inf > date_sup:
+        a = date_inf 
+        date_inf = date_sup
+        date_sup = a
+    for i in range(len(A)):
+        if len(A.index[i]) == 4 :
+            date_i = datetime.strptime(A.index[i],"%Y")
+        elif len(A.index[i]) == 10:
+           date_i = datetime.strptime(A.index[i],"%Y-%m-%d")
+        if date_inf <=date_i<= date_sup:
+           L.append([A.index[i],A[i]])
+    L.sort()
+    N = len(L)
+    nombre_jour = (date_sup-date_inf).days +1
+    date = date_inf
+    k = 0
+    B = []
+    for row in L:
+        B.append(row[0])
+    while N != nombre_jour:
+        date_actuelle = date.isoformat()[0:10]
+        if date_actuelle not in B:
+            L.insert(k,[date.isoformat()[0:10],0])
+            N += 1
+        date += timedelta(days=1)
+        k+=1
+    return render(request,'test2.html',{
+        'L' : L
+    })
