@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.db.models import Q
 from miniprojet.models import thematique, sous_thematique, auteur, article, journaux, dates, laboratoires, institutions
 from datetime import datetime, timedelta
-
+import pandas as pd
 
 def index(request):
     return render (request,'affichage_accueil.html')
@@ -364,7 +364,7 @@ def index53(request):
         if i == 'date_fin':
             sup = request.GET.get('date_fin')
 
-    A = pd.Series(self.liste_date).value_counts()
+    A = pd.Series(dates_qs).value_counts()
     L = []
     date_sup = datetime.strptime(sup,"%Y-%m-%d")
     date_inf = datetime.strptime(inf,"%Y-%m-%d")
