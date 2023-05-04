@@ -17,8 +17,6 @@ class Ressource():
         self.thematique = []        
         self.sous_thematique = []
         self.titre =[]
-        self.name = []
-        self.liste_lien = []
         self.liste_doi = []
 
 
@@ -100,39 +98,18 @@ class Ressource():
         return self.titre
                         
 
-    def recup_csv(self):
-        A = []
-        with open(self.path + '/CORD-19/metadata.csv' , newline='',encoding = "utf8") as csvfile:
-            reader = csv.reader(csvfile)
-            L = []
-            for ligne in reader:
-                L.append(ligne)
-            l = 0
-            while(L[0][l]!= 'title'):
-                l+=1
-            for k in range(1,len(L)):
-                A.append(L[k][l])
-            self.name = list(set(A))
-
             
-    def lien(self):   
-        texte = "Liens url : "
-    
+    def lien(self):       
         with open (self.path + '/data_sans_doublons_titre.csv', encoding = "utf8") as file:
             reader = csv.reader(file)
             L = []
             for ligne in reader :
                 L.append(ligne)
-                
-            indice_lien = 0
-            while(L[0][indice_lien] != 'url'):
-                indice_lien += 1
             indice_doi = 0
             while(L[0][indice_doi] != 'doi'):
                 indice_doi += 1
             
             for k in range (1,len(L)):
-                self.liste_lien.append(L[k][indice_lien])
                 self.liste_doi.append(L[k][indice_doi])
 
 
@@ -186,11 +163,15 @@ class Ressource():
 
         
         
-df = pd.read_csv(os.getcwd()  + '/CORD-19/metadata.csv',low_memory = False)    #creation du fichier data_sans_doublons_titre.csv qui nous sera metadata.csv mais sans doublons
+fichiers = os.listdir(os.getcwd())        
+
+if not 'data_sans_doublons_titre.csv' in fichiers: # On verifie si notre fichier data sans doublons est déjà créé
     
-df.drop_duplicates(subset='doi',inplace=True,ignore_index = True)
+    df = pd.read_csv(os.getcwd()  + '/CORD-19/metadata.csv',low_memory = False)    #creation du fichier data_sans_doublons_titre.csv qui nous sera metadata.csv mais sans doublons
     
-df.to_csv(os.getcwd()  + '/data_sans_doublons_titre.csv',index=False)  
+    df.drop_duplicates(subset='doi',inplace=True,ignore_index = True)
+    
+    df.to_csv(os.getcwd()  + '/data_sans_doublons_titre.csv',index=False)  
 
 
 
