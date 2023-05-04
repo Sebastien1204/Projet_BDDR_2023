@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>choix histogramme institution</title>
+    <style> 
+        #overlay{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #overlay2{
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #un_bouton{
+            margin:0 auto;
+            display: block;
+            text-align: center;
+            font-weight: 700;
+            text-decoration: none;
+            width: 120px;
+            padding: 7px 10px;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type : 'bar',
+        data : {
+          labels: [{% for date in L%} '{{ date[1] }}', {%endfor%}],
+          datasets: [{
+            labels : 'Nombre d article par date',
+            data : [{% for date in L%} {{ date[0] }}, {%endfor%}],
+          }]
+      }
+          
+      
+      
+    </script>
+  </head>
+
+  <body>
+    <div id="overlay">
+        <div id="chart_div"></div>
+    </div>
+    <div id="overlay2">
+        <button onclick="window.location.href = 'http://127.0.0.1:8000/accueil_recherche_institutions';">Retour au choix de recherche </button>
+        <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+    </div>
+  </body>
+</html>
