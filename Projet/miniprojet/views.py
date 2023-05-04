@@ -395,6 +395,13 @@ def index53(request):
             N += 1
         date += timedelta(days=1)
         k+=1
+        
+    dates = []
+    counts = []
+    for row in L:
+        dates.append(row[0])    
+        counts.append(row[1])
     return render(request,'test2.html',{
-        'L' : L
+        'counts' : counts,
+        'dates' : dates
     })
