@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 from miniprojet.models import thematique, sous_thematique, auteur, article, journaux, dates, laboratoires, institutions
+import collections
 from datetime import datetime, timedelta
-import pandas as pd
 
 def index(request):
     return render (request,'affichage_accueil.html')
@@ -363,8 +363,9 @@ def index53(request):
             inf = request.GET.get('date_debut')
         if i == 'date_fin':
             sup = request.GET.get('date_fin')
-
-    A = pd.Series(dates_qs).value_counts()
+            
+    a = dict(collections.Counter(dates_qs))
+    A = list(zip(a.keys(),a.values())
     L = []
     date_sup = datetime.strptime(sup,"%Y-%m-%d")
     date_inf = datetime.strptime(inf,"%Y-%m-%d")
@@ -373,12 +374,12 @@ def index53(request):
         date_inf = date_sup
         date_sup = a
     for i in range(len(A)):
-        if len(A.index[i]) == 4 :
-            date_i = datetime.strptime(A.index[i],"%Y")
-        elif len(A.index[i]) == 10:
-           date_i = datetime.strptime(A.index[i],"%Y-%m-%d")
+        if len(A[i][0]) == 4 :
+            date_i = datetime.strptime(A[i][0],"%Y")
+        elif len(A[i][0]) == 10:
+           date_i = datetime.strptime(A.index[i][0],"%Y-%m-%d")
         if date_inf <=date_i<= date_sup:
-           L.append([A.index[i],A[i]])
+           L.append([A[i][0],A[i][1]])
     L.sort()
     N = len(L)
     nombre_jour = (date_sup-date_inf).days +1
