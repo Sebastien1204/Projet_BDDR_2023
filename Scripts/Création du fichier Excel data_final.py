@@ -5,7 +5,6 @@ import psycopg2
 from password import *
 import pandas as pd
 import csv
-from datetime import datetime, timedelta
 
 
 
