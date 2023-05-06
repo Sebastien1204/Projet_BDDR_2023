@@ -54,14 +54,6 @@ class Ressource():
                     
                 elif element != "":
                     self.sous_thematique[j].append(element)
-                    """
-                    if element[-5] == "_":                 # On met au propre nos sous-thématiques ( Enlever le ".csv" et parfois il y a "_" en fin de ligne, nous le supprimons)
-                        if Ressource.verification(self,element[:-5]) == True:       # Cas où la fin est _.csv
-                            self.sous_thematique[j].append(element[:-5])
-                    else:
-                        if Ressource.verification(self,element[:-4]) == True:       # Cas où la fin est .csv
-                            self.sous_thematique[j].append(element[:-4])
-                    """
             j+=1
         else:
             list_files = os.listdir(new_path)[1:]          # On ne prend pas en compte le premier dossier ( inutile pour le programme )
@@ -98,7 +90,7 @@ class Ressource():
                         
 
             
-    def lien(self):       
+    def lien(self):       #permet de récupérer une liste contenant l'ensemble des doi de metadata.csv ( ceux qui n'ont pas de doublons )
         with open (self.path + '/data_sans_doublons_titre.csv', encoding = "utf8") as file:
             reader = csv.reader(file)
             L = []
@@ -127,30 +119,26 @@ class Ressource():
                 self.titre[i].append("")
 
 
-    def ajoute(self):
+    def ajoute(self):    #Ce programme nous permet d'ajouter les colonnes remplies Thématiques et Sous-Thématiques
         df = pd.read_csv(self.path + '/data_sans_doublons_titre.csv', low_memory = False)
         Theme =[]
         Sous_Theme = []
         M = []
         print(len(self.titre))
-        for i in range(len(self.titre)):
+        for i in range(len(self.titre)):            #Ici, nous créons la liste avec les thématiques/sous-thématiques et doi associé
             if self.titre[i][4] != "":
                 M.append(self.titre[i])
         print(len(M))
         for i in range(len(df['doi'])):
-            if i%10000 == 0:
-                print(i)
-            k = 0
+            k = 0                                   
             for j in range(len(M)):
-                if df['doi'][i] == M[j][4]:
-                    Theme.append(M[j][0])
-                    Sous_Theme.append(M[j][1])
-                    print(i)
-                    print(M[j])
-                    del M[j]
+                if df['doi'][i] == M[j][4]:       
+                    Theme.append(M[j][0])           # On ajoute la thématique correspondant
+                    Sous_Theme.append(M[j][1])      # On ajoute également la sous-thématiques 
+                    del M[j]                        #Afin que notre programme tourne plus vite (et comme nous n'avons pas de doublons) on supprime de l'élément utilisé dans la liste avec les thématiques
                     k = 1
-                    break
-            if k == 0:
+                    break   
+            if k == 0:                              #Ici si k = 0, l'article ne contient pas de thématique et sous-thématique.
                 Theme.append("Inconnu")
                 Sous_Theme.append("Inconnu")
         
