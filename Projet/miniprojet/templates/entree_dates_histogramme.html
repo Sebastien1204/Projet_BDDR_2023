@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>entree date histogramme</title>
+    <style>
+
+        #body{
+                background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p3/16084083-fond-d-ecran-medical-bleu-moderne-icones-medicales-futuristes-forme-hexagonale-geometrique-vectoriel.jpg");
+                background-size: 1580px;
+                background-position: left 5% right 35% bottom 88%;
+                image-rendering: pixelated;
+            }
+    </style>
+  </head>
+  <body id="body">
+    <h2>Nombre d'articles entre deux dates précises.</h2>
+    {% if rien %}
+    Aucun article n'est enregistré
+    {% else %}
+    <form action = "{% url 'index62' %}", method="get", name="search_form">
+      {% csrf_token %}
+      <div>
+        <label for="date_debut">Date de début : </label>
+        <input type="text" name="date_debut">
+        {{form.date_debut}}
+      </div>
+      <div>
+        <label for="date_fin">Date de fin : </label>
+        <input type="text" name="date_fin">
+        {{form.date_fin}}
+      </div>
+      <h2> </h2>
+      <button type="submit" value="Rechercher">Rechercher</button>
+    </form>
+    {% endif %}
+    <h6> </h6>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+  </body>
+</html>

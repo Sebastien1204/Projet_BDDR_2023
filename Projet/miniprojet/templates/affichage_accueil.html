@@ -1,0 +1,214 @@
+<!DOCTYPE Html > 
+<html>
+    {% load static %} 
+    <head>
+        <meta charset="utf-8">
+        <title>Accueil</title>
+        <style>
+            #body{
+                background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p3/16084083-fond-d-ecran-medical-bleu-moderne-icones-medicales-futuristes-forme-hexagonale-geometrique-vectoriel.jpg");
+                background-size: 1580px;
+                background-position: left 5% right 35% bottom 88%;
+                image-rendering: pixelated;
+            }
+
+            nav {
+            display: flex; /* permet d'aligner les éléments horizontalement */
+            justify-content: center; /* centre les éléments horizontalement */
+            position: absolute;
+            top: 13%;
+            text-align: center;
+            }
+
+            nav ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            nav li {
+                display: inline-block;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Éléments de la barre de navigation */
+            nav a {
+            color: #22427C; /* couleur du texte */
+            text-decoration: none; /* enlève le soulignement par défaut */
+            padding: 5px 15px; /* espace autour du texte */
+            margin: 0px 10px; /* marge horizontale pour séparer les éléments */
+            border-radius: 15px; /* arrondi les coins */
+            transition: background-color 0.3s ease-in-out; /* ajoute une transition fluide */
+            display: block;
+            text-align: center;
+            }
+
+            /* État survolé */
+            nav a:hover {
+            background-color: #4e8dac; 
+            }
+
+            nav ul ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                text-align: center;
+                
+            }
+
+            nav ul li:hover >ul {
+                display: block;
+            }
+
+            nav ul ul li {
+                display: inherit;
+                text-align: center;
+                position: relative;
+            }
+
+            nav ul ul a {
+                width: 200px;
+                padding: 5px;
+                position: left 50%;
+                display: block;
+                text-align: center;
+            }
+
+            #overlay{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+            }
+
+            #overlay2{
+                position: absolute;
+                top: 20%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #22427C;
+
+            }
+
+            #overlay3{
+                position: relative;
+                margin-top: 13%;
+                top: 40%;
+                left: 50%;
+                right: 50%;
+                transform: translate(-50%, -50%);
+
+            }
+
+            #overlay4{
+                position: absolute;
+                top: 95%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #22427C;
+                font-size: 10px;
+
+            }
+
+            #un_bouton{
+                margin:0 auto;
+                display: block;
+                text-align: center;
+                font-weight: 700;
+                text-decoration: none;
+                width: 120px;
+                padding: 7px 10px;
+            }   
+        </style>
+      </head>
+        <div id="overlay2">
+            <h1>The COVID-19 Open Research Dataset</h1>
+        </div>
+        <div id="overlay3">
+           <nav>
+            <ul>
+              <li>
+                <a href="http://127.0.0.1:8000/thematique">Liste des thématiques</a>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/thematique">Afficher toutes les thématiques</a></li>
+                    <li><a href="http://127.0.0.1:8000/recherche_thematique">Effectuer une recherche précise</a></li>
+                </ul>
+              </li>
+              <li><a href="http://127.0.0.1:8000/sous_thematique">Liste des sous-thématiques</a>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/sous_thematique">Afficher toutes les sous-thématiques</a></li>
+                    <li><a href="http://127.0.0.1:8000/recherche_sous_thematique">Effectuer une recherche précise</a></li>
+                </ul>
+              </li>
+              <li><a href="http://127.0.0.1:8000/accueil_article">Liste des articles</a>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/accueil_article">Afficher quelques articles</a></li>
+                    <li><a href="http://127.0.0.1:8000/accueil_recherche_article">Effectuer une recherche précise</a>
+                        <ul>
+                            <li><a href="http://127.0.0.1:8000/choix_titre_article">Recherche par titre</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_auteur_article">Recherche par auteur</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_date_article">Recherche par date</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_journal_article">Recherche par journal</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_thematique_article">Recherche par thématique</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_sous_thematique_article">Recherche par sous-thématique</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_institution_article">Recherche par institution</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_laboratoire_article">Recherche par laboratoire</a></li>
+                        </ul>
+                    </li>
+                </ul>
+              </li>
+              <li><a href="http://127.0.0.1:8000/choix_histogramme_article">Nombre d'articles</a>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/entree_dates_histogramme">Nombre d'articles par date</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_semaine_histogramme">Nombre d'articles par semaine</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_mois_histogramme">Nombre d'articles par mois</a></li>  
+                </ul>     
+              </li>
+              <li><a href="http://127.0.0.1:8000/accueil_auteur">Liste des auteurs</a>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/accueil_auteur">Afficher quelques auteurs</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_recherche_auteur">Effectuer une recherche précise</a>
+                        <ul>
+                            <li><a href="http://127.0.0.1:8000/choix_nom_auteur">Recherche par nom</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_prenom_auteur">Recherche par prénom</a></li>
+                            <li><a href="http://127.0.0.1:8000/choix_titre_auteur">Recherche par titre</a></li>
+                        </ul>
+                    </li>
+                </ul>
+              </li>
+              <li><a href="http://127.0.0.1:8000/accueil_journaux">Liste des journaux</a>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/accueil_journaux">Afficher quelques journaux</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_recherche_journal">Recherche par nom</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_histogramme_journal">Afficher l'histogramme</a></li>
+                </ul>
+              </li>
+              <li><a href="http://127.0.0.1:8000/accueil_laboratoires">Liste des laboratoires</a>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/accueil_laboratoires">Afficher quelques laboratoires</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_recherche_laboratoire">Recherche par nom</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_histogramme_laboratoire">Afficher l'histogramme</a></li>
+                </ul>
+              </li>
+              <li><a href="http://127.0.0.1:8000/accueil_institutions">Liste des institutions</a>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/accueil_institutions">Afficher quelques institutions</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_recherche_institution">Recherche par nom</a></li>
+                    <li><a href="http://127.0.0.1:8000/choix_histogramme_institution">Afficher l'histogramme</a></li>
+                </ul>
+              </li>
+            </ul>
+            </nav> 
+        </div>
+        
+    <div id="overlay">  
+        <body id="body">
+        </body>   
+    </div>   
+    <div id="overlay4">
+        <h3>Réalisé par BÉQUET Clément et NOËL Sébastien</h3>
+    </div>
+    
+</html>

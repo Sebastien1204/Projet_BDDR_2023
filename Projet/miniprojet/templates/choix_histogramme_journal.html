@@ -1,0 +1,261 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>choix histogramme journal</title>
+    <style> 
+        #overlay{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #overlay2{
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #un_bouton{
+            margin:0 auto;
+            display: block;
+            text-align: center;
+            font-weight: 700;
+            text-decoration: none;
+            width: 120px;
+            padding: 7px 10px;
+        }
+
+        #body{
+                background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p3/16084083-fond-d-ecran-medical-bleu-moderne-icones-medicales-futuristes-forme-hexagonale-geometrique-vectoriel.jpg");
+                background-size: 1580px;
+                background-position: left 5% right 35% bottom 88%;
+                image-rendering: pixelated;
+            }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', "Nombre d'articles");
+        data.addRows([
+        ['PLoS One',7431],
+['bioRxiv',7271],
+['Int J Environ Res Public Health',7243],
+['BMJ',5910],
+['Sci Rep',4607],
+['Cureus',3148],
+['Front Psychol',3101],
+['Sustainability',2818],
+['Front Immunol',2785],
+['Nature',2765],
+['BMJ Open',2739],
+['Viruses',2708],
+['Front Public Health',2560],
+['Journal of virology',2212],
+['Int J Mol Sci',2156],
+['JAMA',2065],
+['J Med Virol',2030],
+['Lancet',1979],
+['J Clin Med',1771],
+['Science',1757],
+['Vaccines (Basel)',1711],
+['Chest',1694],
+['Int J Infect Dis',1674],
+['Open Forum Infect Dis',1489],
+['BMC Public Health',1471],
+['Nat Commun',1428],
+['Front Med (Lausanne)',1425],
+['Vaccine',1407],
+['Nutrients',1406],
+['J Med Internet Res',1360],
+['Emerg Infect Dis',1346],
+['Sensors (Basel)',1334],
+['American Journal of Respiratory and Critical Care Medicine',1301],
+['Clin Infect Dis',1298],
+['BMC Infect Dis',1274],
+['Molecules',1272],
+['Front Psychiatry',1264],
+['Int. j. environ. res. public health (Online)',1243],
+['Healthcare (Basel)',1131],
+['Front Microbiol',1084],
+['Sci Total Environ',1084],
+['JAMA Netw Open',1075],
+['Virology',1028],
+['Front Pharmacol',1027],
+['Surgical endoscopy',999],
+['Innov Aging',991],
+['Crit Care',983],
+['Heliyon',932],
+['J Infect',921],
+['Blood',919],
+['Journal of the American College of Cardiology',917],
+['Trials',914],
+['medRxiv',865],
+['Br J Surg',858],
+['J. med. virol',853],
+['Dermatol Ther',850],
+['N Engl J Med',843],
+['Medicine (Baltimore)',835],
+['MMWR Morb Mortal Wkly Rep',823],
+['Arch Virol',822],
+['Stroke',813],
+['Cells',804],
+['J Infect Dis',791],
+['Environ Sci Pollut Res Int',790],
+['BMJ case reports',783],
+['Diagnostics (Basel)',781],
+['Gastroenterology',768],
+['Lancet Infect Dis',766],
+['European Respiratory Journal',740],
+['PLoS Pathog',710],
+['The New England journal of medicine',701],
+['BMC Health Serv Res',691],
+['Intensive Care Med',686],
+['Pediatrics',678],
+['Proceedings of the National Academy of Sciences of the United States of America',678],
+['Med Hypotheses',677],
+['J Clin Virol',653],
+['Pathogens',638],
+['Virol J',636],
+['BMJ open',629],
+['Circulation',614],
+['BMJ Glob Health',614],
+['Neurology',609],
+['The Journal of general virology',603],
+['Br Dent J',603],
+['Clin Microbiol Infect',592],
+['Int J Clin Pract',590],
+['Indian J Ophthalmol',587],
+['Proc Natl Acad Sci U S A',582],
+['Foods',580],
+['PloS one',575],
+['Infect Control Hosp Epidemiol',573],
+['Pan Afr Med J',567],
+['Thorax',566],
+['Cancers (Basel)',561],
+['Am J Infect Control',561],
+['J Gen Intern Med',559],
+['Scientific reports',557],
+['EClinicalMedicine',556],
+['Public Health',551],
+['Front Pediatr',549],
+['Microorganisms',548],
+['Transfusion',540],
+['Virus Res',539],
+['Front Cell Infect Microbiol',537],
+['Eur J Public Health',535],
+['Biomedicines',526],
+['AJNR. American journal of neuroradiology',525],
+['CMAJ',524],
+['Pharmaceutics',524],
+['Journal of neurointerventional surgery',523],
+['The Veterinary record',522],
+['J Hosp Infect',521],
+['Clin. infect. dis',517],
+['J Virol Methods',517],
+['Advances in experimental medicine and biology',514],
+['Respirology',508],
+['Computational Science and Its Applications - ICCSA 2020',500],
+['J Family Med Prim Care',499],
+['Ann Med Surg (Lond)',495],
+['New Scientist',495],
+['Critical Care Medicine',490],
+['J Am Acad Dermatol',489],
+['Infection control and hospital epidemiology',485],
+['Journal of clinical microbiology',485],
+['Psychiatry Res',484],
+['Medicina (Kaunas)',478],
+['Disaster Med Public Health Prep',476],
+['PeerJ',476],
+['American journal of public health',473],
+['Travel Med Infect Dis',470],
+['Biomed Res Int',468],
+['J Infect Public Health',468],
+['Nature (Lond.)',467],
+['JMIR Res Protoc',463],
+['Ann Intern Med',463],
+['RSC Adv',462],
+['Acta Biomed',460],
+['Antibiotics (Basel)',456],
+['PLoS Negl Trop Dis',456],
+['Disaster medicine and public health preparedness',454],
+['Environ Res',453],
+['Curr Psychol',452],
+['Front Neurol',451],
+['Front Cardiovasc Med',449],
+['Front Physiol',446],
+['European review for medical and pharmacological sciences',444],
+['Lancet Respir Med',441],
+['J Eur Acad Dermatol Venereol',441],
+['Am J Emerg Med',438],
+['Asian J Psychiatr',438],
+['Value in Health',431],
+['Diabetes Metab Syndr',430],
+['Hematology, Transfusion and Cell Therapy',430],
+['Applied Sciences',429],
+['Cell',428],
+['JMIR Form Res',426],
+['World Neurosurg',424],
+['The Pediatric infectious disease journal',423],
+['JMIR Public Health Surveill',423],
+['Anaesthesia',423],
+['BMC Med Educ',419],
+['Allergy',419],
+['Front Oncol',418],
+['mBio',418],
+['Vet Microbiol',416],
+['Nat Med',416],
+['Animals (Basel)',414],
+['Eur Rev Med Pharmacol Sci',413],
+['Front Vet Sci',412],
+['J Pers Med',412],
+['MMW Fortschr Med',411],
+['Front Cell Dev Biol',408],
+['Nucleic Acids Res',408],
+['Biomolecules',408],
+['IOP Conference Series. Earth and Environmental Science',407],
+['Epidemiol Infect',406],
+['J Affect Disord',405],
+['European Psychiatry',400],
+['Human vaccines & immunotherapeutics',398],
+['Journal of Clinical Oncology',398],
+['J Biomol Struct Dyn',394],
+['Archives of Disease in Childhood',389],
+['Am J Trop Med Hyg',389],
+['Kidney International Reports',388],
+['EBioMedicine',388]
+        ]);
+
+        var options = { 'title':'Histogramme des journaux',
+                        'legend':'left',
+                        'width':1500,
+                        'height':600,
+                        'backgroundColor': 'transparent'
+                      };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body id="body">
+    <div id="overlay">
+        <div id="chart_div"></div>
+    </div>
+    <div id="overlay2">
+        <button onclick="window.location.href = 'http://127.0.0.1:8000/accueil_recherche_journaux';">Retour au choix de recherche </button>
+        <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+    </div>
+  </body>
+</html>

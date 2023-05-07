@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>recherche institutions</title>
+    <style> 
+      #overlay{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+
+      }
+
+      #un_bouton{
+          margin:0 auto;
+          display: block;
+          text-align: center;
+          font-weight: 700;
+          text-decoration: none;
+          width: 120px;
+          padding: 7px 10px;
+      } 
+
+      #body{
+                background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p3/16084083-fond-d-ecran-medical-bleu-moderne-icones-medicales-futuristes-forme-hexagonale-geometrique-vectoriel.jpg");
+                background-size: 1580px;
+                background-position: left 5% right 35% bottom 88%;
+                image-rendering: pixelated;
+            }  
+  </style>
+  </head>
+  <div id="overlay">
+    <body id="body">
+      <h2>Comment souhaitez-vous rechercher une institution ?</h2>
+      <h2></h2>
+      <button id="un_bouton" onclick="window.location.href = 'http://127.0.0.1:8000/choix_recherche_institution';">Recherche précise</button>
+      <h2></h2>
+      <button id="un_bouton" onclick="window.location.href = 'http://127.0.0.1:8000/choix_histogramme_institution';">Histogramme</button>
+      <h2></h2>
+      <button id="un_bouton" onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+    </body>
+  </div>
+</html>

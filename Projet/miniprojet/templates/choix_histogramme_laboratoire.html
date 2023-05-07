@@ -1,0 +1,278 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>choix histogramme laboratoire</title>
+    <style> 
+        #overlay{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #overlay2{
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #un_bouton{
+            margin:0 auto;
+            display: block;
+            text-align: center;
+            font-weight: 700;
+            text-decoration: none;
+            width: 120px;
+            padding: 7px 10px;
+        }
+
+        #body{
+                background-image: url("https://static.vecteezy.com/ti/vecteur-libre/p3/16084083-fond-d-ecran-medical-bleu-moderne-icones-medicales-futuristes-forme-hexagonale-geometrique-vectoriel.jpg");
+                background-size: 1580px;
+                background-position: left 5% right 35% bottom 88%;
+                image-rendering: pixelated;
+            }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', "Nombre d'articles");
+        data.addRows([
+        ['Laboratory of Virology',121],
+['State Key Laboratory of Virology',112],
+['Intensive Care Unit',103],
+['State Key Laboratory of Agricultural Microbiology',87],
+['Li Ka Shing',86],
+['Student Research Committee',78],
+['State Key Laboratory of Veterinary Biotechnology',78],
+['State Key Laboratory of Pathogen and Biosecurity',65],
+['European Molecular Biology Laboratory',55],
+['UMC',48],
+['State Key Laboratory of Molecular Vaccinology and Molecular Diagnostics',45],
+['State Key Laboratory of Respiratory Disease',44],
+['CAS Key Laboratory of Pathogenic Microbiology and Immunology',43],
+['State Key Laboratory of Veterinary Etiological Biology',39],
+['Social Psychiatry and Psychiatric Epidemiology',39],
+['Infectious Diseases Unit',39],
+['Clinical Laboratory',38],
+['MRC Centre for Global Infectious Disease Analysis',38],
+['Laboratoire de Virologie',37],
+['Infection Biology Unit',33],
+['Virology Laboratory',33],
+['Applied Microbiology and Biotechnology',33],
+['Molecular Virology Laboratory',30],
+['State Key Laboratory of Biocontrol',30],
+['Science for Life Laboratory',29],
+['Laboratory of Infectious Diseases',27],
+['State Key Laboratory of Quality Research in Chinese Medicine',26],
+['State Key Laboratory of Emerging Infectious Diseases',24],
+['State Key Laboratory for Diagnosis',24],
+['Laboratory of Veterinary Infectious Disease',22],
+['Pediatric Intensive Care Unit',21],
+['Microbiology Laboratory',21],
+['State Key Laboratory of Biotherapy and Cancer Center',20],
+['Laboratory of Experimental Virology',20],
+['Key Laboratory of Special Pathogens and Biosafety',19],
+['Virology Division',19],
+['National Microbiology Laboratory',18],
+['Laboratory Medicine',18],
+['Laboratory of Molecular Immunology',18],
+['Laboratory of Virology and Chemotherapy',18],
+['CAS Key Laboratory of Special Pathogens and Biosafety',18],
+['Klinikum rechts der Isar',17],
+['Key Laboratory of Medical Molecular Virology (MOE/NHC/CAMS)',17],
+['Laboratory of Veterinary Microbiology',16],
+['Division of Allergy and Infectious Diseases',16],
+['Unit of Infectious Diseases',16],
+['Queensland Paediatric Infectious Diseases Laboratory',15],
+['State Key Laboratory of Respiratory Diseases',15],
+['Laboratory of Molecular Biology',15],
+['State Key Laboratory of Pharmaceutical Biotechnology',15],
+['State Key Laboratory for Infectious Disease Prevention and Control',15],
+['WHO Collaborating Centre for Infectious Disease Epidemiology and Control',15],
+['UMR 7257',15],
+['Veterinary Diagnostic Laboratory',15],
+['Infectious Disease Unit',14],
+['Laboratory of Microbiology',14],
+['The Society for Reliability Engineering, Quality and Operations Management (SREQOM)',14],
+['State Key Laboratory for Diagnosis and Treatment of Infectious Diseases',14],
+['Guangdong Provincial Key Laboratory of Tropical Disease Research',14],
+['State Key Laboratory of Biotherapy',14],
+['Neonatal Intensive Care Unit',14],
+['State Key Laboratory of Agrobiotechnology',14],
+['Division of Allergy and Immunology',14],
+['Special Infectious Agents Unit',14],
+['NHC Key Laboratory of Systems Biology of Pathogens',14],
+['UMR 3569',14],
+['Central Laboratory',13],
+['L3S Research Center',13],
+['Laboratory of Neuroimmunovirology',13],
+['Key Laboratory of Jilin Province for Zoonosis Prevention and Control',13],
+['Mathematical Image Analysis Group',13],
+['Amsterdam UMC',13],
+['National Key Laboratory of Veterinary Biotechnology',13],
+['Division of Allergy and Clinical Immunology',13],
+['Laboratory of Molecular Virology',13],
+['Laboratory of Retrovirology',13],
+['Laboratory of Clinical and Epidemiological Virology',12],
+['Laboratory of Clinical Virology',12],
+['Infectious Disease Epidemiology Group',12],
+['CAS Key Laboratory of Mental Health',12],
+['Laboratory of Gene Technology',12],
+['MRC Laboratory of Molecular Biology',12],
+['Laboratory of Pharmacology',12],
+['State Key Laboratory of Animal Nutrition',12],
+['State Key Laboratory of Oral Diseases',11],
+['MRC Human Immunology Unit',11],
+['UMR2000',11],
+['Laboratoire de virologie',11],
+['GSK',11],
+['Clinical Microbiology Laboratory',11],
+['MRC Biostatistics Unit',11],
+['Clinical Research Unit',11],
+['ACM Reference Format',11],
+['State Key Laboratory of Complex Severe and Rare Diseases',11],
+['One Health Research Group',11],
+['State Key Laboratory of Bioelectronics',11],
+['State Key Laboratory of Drug Research',11],
+['State Key Laboratory of Freshwater Ecology and Biotechnology',11],
+['Cardiac Intensive Care Unit',10],
+['The Jackson Laboratory',10],
+['Hunan Provincial Key Laboratory of Medical Virology',10],
+['MOH Key Laboratory of Systems Biology of Pathogens',10],
+['Laboratorio de Virología Molecular',10],
+['Rheumatology Unit',10],
+['European Centre for Disease Prevention and Control (ECDC)',10],
+['State Key Laboratory of Medical Molecular Biology',10],
+['Centre for Biological Threats and Special Pathogens',10],
+['State Key Laboratory of Oncology in South China',10],
+['Laboratory of Veterinary Pathology',10],
+['Laboratório de Virologia',10],
+['Centre for Genomic Regulation (CRG)',10],
+['Victorian Infectious Diseases Reference Laboratory',10],
+['State Key Laboratory of Infectious Disease Prevention and Control',10],
+['WHO Collaborating Centre for Reference and Research on Influenza',10],
+['Key Laboratory of Structural Biology of Zhejiang Province',10],
+['Laboratory',10],
+['Laboratory of Chemical Physics',10],
+['State Key Laboratory of Oncogenes and Related Genes',10],
+['State Key Laboratory of Natural and Biomimetic Drugs',10],
+['State Key Laboratory of Molecular Biology',10],
+['Central Virology Laboratory',9],
+['MAP Centre for Urban Health Solutions',9],
+['Virology and Cell Technology Laboratory',9],
+['Laboratory of Bacteriology',9],
+['Key Laboratory of Zoonosis Research',9],
+['Microscopic Image and Medical Image Analysis Group',9],
+['Li Ka Shing Centre for Health Information and Discovery',9],
+['Cold Spring Harbor Laboratory',9],
+['Laboratory of Toxicology and Environmental Health',9],
+['Centre for Infectious Diseases and Microbiology Laboratory Services',9],
+['Key Laboratory of Medical Virology',9],
+['NHC Key Laboratory of Biosafety',9],
+['Allergy Immunology and Cell Biology Unit',9],
+['Key Laboratory of Public Health Safety',9],
+['nouveau_texte',9],
+['State Key Laboratory of Protein and Plant Gene Research',9],
+['Laboratory of Immunology',9],
+['Artificial Intelligence Laboratory',9],
+['UMR 1137',9],
+['State Key Laboratory of Proteomics',9],
+['State Key Laboratory for Emerging Infectious Diseases',8],
+['Laboratory of Animal Virology',8],
+['State Key Laboratory of Phytochemistry and Plant Resources in West China',8],
+['Protein Interactions Group',8],
+['Cavendish Laboratory',8],
+['State Key Laboratory of Medicinal Chemical Biology',8],
+['BK21 Plus KNU Creative BioResearch Group',8],
+['Laboratorio de Virología',8],
+['Laboratory of Molecular Biology and Immunology',8],
+['Applied Statistics Unit',8],
+['The Ministry of Education Key Laboratory of Protein Science',8],
+['West African Centre for Cell Biology of Infectious Pathogens (WACCBIP)',8],
+['Archivos de la Sociedad Espanola de Oftalmologia',8],
+['Central Veterinary Laboratory',7],
+['UMC, location AMC',7],
+['nouveau_texte',7],
+['State Key Laboratory of Cell Biology',7],
+['CAS Key Laboratory of Behavioral Science',7],
+['Pediatric Highly Intensive Care Unit',7],
+['Key Laboratory of Zoonosis of Ministry of Agriculture',7],
+['MRC Centre for Outbreak Analysis and Modelling',7],
+['State Key Laboratory of Cardiovascular Disease',7],
+['IRTA',7],
+['Laboratory of Experimental Immunology',7],
+['Massachusetts Eye and Ear Infirmary',7],
+['SALBIS Research Group',7],
+['MRC Integrative Epidemiology Unit',7],
+['Laboratory of Immunopharmacology',7],
+['Public Health Laboratory',7],
+['Jet Propulsion Laboratory',7],
+['Laboratory of Allergic Diseases',7],
+['Key Laboratory of Veterinary Biological Engineering and Technology',7],
+['Chromosome Replication Laboratory',7],
+['Virology Group',7],
+['Key Laboratory of Fujian-Taiwan Animal Pathogen Biology',7],
+['Centre for Clinical Infection and Diagnostics Research',7],
+['Microbiology and Virology Unit',7],
+['Key Laboratory of Cancer Prevention and Therapy',7],
+['State Key Laboratory for Molecular Virology and Genetic Engineering',7],
+['Laboratory of Virology and Infectious Disease',7],
+['MIT Media Lab',7],
+['IRD',7],
+['CAS Key Laboratory of Special Pathogens',7],
+['Pediatric Emergency Unit',7],
+['Drug Safety Research Unit',7],
+['UMR 6098',7],
+['Laboratory for Industrial and Applied Mathematics (LIAM)',7],
+['Laboratory for Industrial and Applied Mathematics',7],
+['Centre for Safe Medication Practice and Research',7],
+['Temasek Life Sciences Laboratory',7],
+['Laboratory of Genomic Diversity',7],
+['Journal of Inorganic and Organometallic Polymers and Materials',7],
+['Central Research Laboratory',7],
+['Sanquin Research and Landsteiner Laboratory',7],
+['Key Laboratory of Medical Molecular Virology',7],
+['Laboratory of Immunobiology',7],
+['State Key Laboratory of Natural Medicines',7],
+['State Key Laboratory of Ophthalmology',7],
+['State Key Laboratory of Southwestern Chinese Medicine Resources',7],
+['Respiratory Diseases Unit',7],
+['Wellcome Centre for Human Genetics',7],
+['Swiss Institute of Allergy and Asthma Research (SIAF)',7],
+['Helmholtz Centre for Infection Research (HZI)',7]
+        ]);
+
+        var options = { 'title':'Histogramme des laboratoires',
+                        'legend':'left',
+                        'width':1500,
+                        'height':600,
+                        'backgroundColor': 'transparent'
+                      };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body id="body">
+    <div id="overlay">
+        <div id="chart_div"></div>
+    </div>
+    <div id="overlay2">
+        <button onclick="window.location.href = 'http://127.0.0.1:8000/accueil_recherche_laboratoires';">Retour au choix de recherche </button>
+        <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
+    </div>
+  </body>
+</html>
