@@ -59,5 +59,8 @@ urlpatterns = [
     path('resultat_recherche_auteur_prenom',views.index58,name="index58"),
     path('resultat_recherche_auteur_titre',views.index59,name="index59"),
     path('entree_dates_histogramme',views.index60,name="index60"),
-    path('resultat_date_histogramme',views.index62,name="index62"),
+    path('resultat_date_histogramme',views.index61,name='index61'),
+    path('resultat_date_tableau',views.index62,name="index62"),
+    path('choix_type_resultat_dates',views.index63,name="index63"),
+    path('entree_dates_tableau',views.index64,name="index64")
 ]

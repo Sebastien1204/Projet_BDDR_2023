@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.db.models import Q, When
 from miniprojet.models import thematique, sous_thematique, auteur, article, journaux, dates, laboratoires, institutions
 from datetime import datetime, timedelta
+from io import BytesIO
+import matplotlib.pyplot as plt
 
 
 
@@ -412,17 +414,22 @@ def index61(request):
             date_fin = request.GET.get('date_fin')
 
     format1 = "%Y-%m-%d"
-    format2 = "%Y"
+    format2 = "%Y-%m"
+    format3 = "%Y"
 
-    if (len(date_debut) > 4):
+    if (len(date_debut) > 7):
         date_1 = datetime.strptime(date_debut, format1)
-    else :
+    elif(len(date_debut) <= 7 and len(date_debut) > 4):
         date_1 = datetime.strptime(date_debut, format2)
-
-    if (len(date_fin) > 4):
-        date_2 = datetime.strptime(date_fin, format1)
     else :
+        date_1 = datetime.strptime(date_debut, format3)
+
+    if (len(date_fin) > 7):
+        date_2 = datetime.strptime(date_fin, format1)
+    elif(len(date_fin) <= 7 and len(date_fin) > 4):
         date_2 = datetime.strptime(date_fin, format2)
+    else :
+        date_2 = datetime.strptime(date_fin, format3)    
     
     intervalle = (date_2 - date_1).days + 1
     
@@ -448,13 +455,18 @@ def index61(request):
         else:
             liste_quantites_intervalle.append(0)
 
-    return render(request,'test2.html',{
-        'all_dates' : all_dates,
-        'dates_qs' : dates_qs,
-        'liste_dates_intervalle' : liste_dates_intervalle,
-        'liste_quantites_intervalle' : liste_quantites_intervalle,
-        'taille' : len(liste_dates_intervalle)
-    })
+    a = plt.plot(liste_dates_intervalle,liste_quantites_intervalle)
+    plt.xlabel('Dates')
+    plt.ylabel("Nombre d'articles")
+    plt.title("Histogramme d'articles par date")
+    ax = plt.gca()
+    ax.axes.xaxis.set_visible(False)
+
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    return HttpResponse(buffer.getvalue(), content_type='image/png')
 
 def index62(request):
     all_dates = dates.objects.all()
@@ -465,17 +477,22 @@ def index62(request):
             date_fin = request.GET.get('date_fin')
 
     format1 = "%Y-%m-%d"
-    format2 = "%Y"
+    format2 = "%Y-%m"
+    format3 = "%Y"
 
-    if (len(date_debut) > 4):
+    if (len(date_debut) > 7):
         date_1 = datetime.strptime(date_debut, format1)
-    else :
+    elif(len(date_debut) <= 7 and len(date_debut) > 4):
         date_1 = datetime.strptime(date_debut, format2)
-
-    if (len(date_fin) > 4):
-        date_2 = datetime.strptime(date_fin, format1)
     else :
+        date_1 = datetime.strptime(date_debut, format3)
+
+    if (len(date_fin) > 7):
+        date_2 = datetime.strptime(date_fin, format1)
+    elif(len(date_fin) <= 7 and len(date_fin) > 4):
         date_2 = datetime.strptime(date_fin, format2)
+    else :
+        date_2 = datetime.strptime(date_fin, format3)
     
     intervalle = (date_2 - date_1).days + 1
     
@@ -488,7 +505,13 @@ def index62(request):
 
     dates_qs = dates_qs.order_by('date')
 
-    return render(request,'resultat_date_histogramme.html',{
+    return render(request,'resultat_date_tableau.html',{
         'all_dates' : all_dates,
         'dates_qs' : dates_qs
     })
+
+def index63(request):
+    return render(request,'choix_type_resultat_dates.html')
+
+def index64(request):
+    return render(request,'entree_dates_tableau.html')
