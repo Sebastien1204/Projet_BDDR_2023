@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
         <meta charset="utf-8">
@@ -10,12 +11,23 @@
                     background-size: 1580px;
                     background-position: left 5% right 35% bottom 88%;
                     image-rendering: pixelated;
+                    z-index: 10;
                 }
+            
+            #image{
+                image-rendering: pixelated;
+                z-index: 5;
+            }
+
         </style>
       </head>
-<body>
+<body id="body">
     <button onclick="window.location.href = 'http://127.0.0.1:8000/entree_dates_histogramme';">Effectuer une nouvelle recherche </button>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000/choix_type_resultat_dates';">Retour au type d'histogramme </button>
     <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
-    <img src="{% '/index61/' %}" alt="Graphique Matplotlib" style="width: 800px; height: 600px;">
+    <p>
+      <img id="image" src="{% static 'images/graph.png' %}">  
+    </p>
+    
 </body>
 </html>

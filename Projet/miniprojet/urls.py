@@ -28,7 +28,6 @@ urlpatterns = [
     path('resultat_recherche_article_laboratoire', views.index34, name='index34'),
     path('choix_histogramme_article',views.index14,name='index14'),
     path('choix_date_histogramme',views.index15,name='index15'),
-    path('choix_semaine_histogramme',views.index16,name='index16'),
     path('choix_mois_histogramme',views.index17,name='index17'),
     path('choix_annee_histogramme',views.index18,name='index18'),
     path('accueil_auteur',views.index20,name="index20"),
@@ -62,5 +61,6 @@ urlpatterns = [
     path('resultat_date_histogramme',views.index61,name='index61'),
     path('resultat_date_tableau',views.index62,name="index62"),
     path('choix_type_resultat_dates',views.index63,name="index63"),
-    path('entree_dates_tableau',views.index64,name="index64")
+    path('entree_mois_histogramme',views.index65,name="index65"),
+    path('entree_annee_histogramme',views.index66,name="index66")
 ]

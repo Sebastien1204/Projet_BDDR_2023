@@ -34,16 +34,18 @@
     </style>
   </head>
   <body id="body">
-    <h2>Liste des thématiques</h2>
+    <h2>Liste des thématiques.</h2>
     <button onclick="window.location.href = 'http://127.0.0.1:8000/recherche_thematique';">Effectuer une recherche précise </button>
     <button onclick="window.location.href = 'http://127.0.0.1:8000';">Retour à la page d'accueil </button>
     <table class = "mon_tableau">
         <p>{{ nb}} </p>
         <tr id="entree">
+            <td> Id </td>
             <td> Nom </td>
         </tr>
     {% for a in thematique %}
     <tr>
+        <td> {{ a.thematique_id }} </td>
         <td>  {{ a.nom }}</td>
     </tr>
     {% endfor %}

@@ -7,7 +7,7 @@ from io import BytesIO
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import base64
+import numpy as np
 
 
 
@@ -29,6 +29,10 @@ def index5(request):
     all_thematique = thematique.objects.all()
     thematique_qs = all_thematique
     for i in dict(request.GET):
+        if i == 'thematique_id':
+            thematique_id = request.GET.get('thematique_id')
+            if thematique_id != "":
+                thematique_qs = thematique_qs.filter(Q(thematique_id=thematique_id))
         if i == 'nom':
             nom = request.GET.get('nom')
             if nom != "":
@@ -107,14 +111,11 @@ def index14(request):
 def index15(request):
     return render(request,'entree_dates_histogramme.html')
 
-def index16(request):
-    return render(request,'choix_semaine_histogramme.html')
-
 def index17(request):
-    return render(request,'choix_mois_histogramme.html')
+    return render(request,'entree_mois_histogramme.html')
 
 def index18(request):
-    return render(request,'choix_annee_histogramme.html')
+    return render(request,'entree_annee_histogramme.html')
 
 def index19(request):
     return render(request,'accueil_auteur.html')
@@ -426,70 +427,90 @@ def index61(request):
     if (len(date_fin) > 7):
         date_2 = datetime.strptime(date_fin, format1)
     elif(len(date_fin) <= 7 and len(date_fin) > 4):
-        date_2 = datetime.strptime(date_fin, format2)
+        date2 = datetime.strptime(date_fin, format2)
+        if(date2.month == 12):
+            date_2 = date2.replace(year = date2.year + 1, month=1) - timedelta(1)
+        else:
+            date_2 = date2.replace(month=date2.month+1)
+
     else :
-        date_2 = datetime.strptime(date_fin, format3)
-
-    if (len(date_debut) > 7):
-        intervalle = (date_2 - date_1).days + 1
-        liste_dates_intervalle = []
-        for i in range(intervalle):
-            liste_dates_intervalle.append(datetime.strftime(date_1 + timedelta(i), format1))
-    elif(len(date_debut) <= 7 and len(date_debut) > 4):
-        intervalle = date_2.month - date_1.month + 1
-        liste_dates_intervalle = []
-        liste_dates_intervalle.append(date_debut)
-        for i in range(1,intervalle):
-            date = datetime.strptime(liste_dates_intervalle[i-1], format2)
-            if(date.month >= 12):
-                a = date.replace(year=date.year+1,month=1)
-            else :
-                a = date.replace(month=date.month+1)
-            liste_dates_intervalle.append(datetime.strftime(a, format2))
-    else :
-        intervalle = date_2.year - date_1.year + 1
-        liste_dates_intervalle = []
-        for i in range(intervalle):
-            liste_dates_intervalle.append(datetime.strftime(date_1 + timedelta(366*i), format3))
-
-    dates_qs = dates_qs.filter(Q(Q(date__in=liste_dates_intervalle)))
-
-    dates_qs = dates_qs.order_by('date')
+        date2 = datetime.strptime(date_fin, format3)
+        date_2 = date2.replace(year = date2.year + 1)- timedelta(1)
 
     liste_dates_dans_base_de_donnees = []
 
     for i in range(dates.objects.count()):
         liste_dates_dans_base_de_donnees.append(dates.objects.values_list('date')[i][0])
 
+    intervalle_jour = (date_2 - date_1).days + 1
     liste_quantites_intervalle = []
 
-    for i in range(len(liste_dates_intervalle)):
-        if(liste_dates_intervalle[i] in liste_dates_dans_base_de_donnees):
-            liste_quantites_intervalle.append(dates_qs.get(date=liste_dates_intervalle[i]).quantite)
-        else:
-            liste_quantites_intervalle.append(0)
+    if (len(date_debut) > 7):
+        liste_dates_intervalle = []
+        for i in range(intervalle_jour):
+            jour = date_1 + timedelta(i)
+            liste_dates_intervalle.append(datetime.strftime(jour, format1))
+            if(datetime.strftime(jour, format1) in liste_dates_dans_base_de_donnees):
+                liste_quantites_intervalle.append(dates_qs.get(date=datetime.strftime(jour, format1)).quantite)
+            else:
+                liste_quantites_intervalle.append(0)
+
+    elif(len(date_debut) <= 7 and len(date_debut) > 4):
+        intervalle = (date_2.year -date_1.year) *12 + date_2.month - date_1.month + 1
+        liste_dates_intervalle = []
+        liste_dates_intervalle.append(date_debut)
+        liste_quantites_intervalle = [0] * intervalle
+        for i in range(1,intervalle):
+            date = datetime.strptime(liste_dates_intervalle[i-1], format2)
+            if(date.month >= 11):
+                a = date.replace(year=date.year+1,month=1)
+            else :
+                a = date.replace(month=date.month+1)
+            liste_dates_intervalle.append(datetime.strftime(a, format2))
+            if a in liste_dates_dans_base_de_donnees:
+                liste_quantites_intervalle[i] += dates_qs.get(date=datetime.strftime(a, format2)).quantite
+        k = -1
+        for i in range(intervalle_jour):
+            jour = date_1 + timedelta(i)
+            if jour.day == 1:
+                k+=1
+            if(datetime.strftime(jour, format1) in liste_dates_dans_base_de_donnees):
+                liste_quantites_intervalle[k] += dates_qs.get(date=datetime.strftime(jour, format1)).quantite
+
+
+    else :
+        intervalle = date_2.year - date_1.year + 1
+        liste_dates_intervalle = []
+        liste_quantites_intervalle = [0] * intervalle
+        for i in range(intervalle):
+            liste_dates_intervalle.append(datetime.strftime(date_1 + timedelta(366*i), format3))
+            if datetime.strftime(date_1 + timedelta(366*i), format3) in liste_dates_dans_base_de_donnees:
+                liste_quantites_intervalle[i] += dates_qs.get(date=datetime.strftime(date_1 + timedelta(366*i), format3)).quantite
+        k=-1
+        for i in range(intervalle_jour):
+            jour = date_1 + timedelta(i)
+            if jour.day == 1 and jour.month == 1:
+                k+=1
+            if(datetime.strftime(jour, format1) in liste_dates_dans_base_de_donnees):
+                liste_quantites_intervalle[k] += dates_qs.get(date=datetime.strftime(jour, format1)).quantite
 
     a = plt.bar(liste_dates_intervalle,liste_quantites_intervalle)
     plt.xlabel('Dates')
     plt.ylabel("Nombre d'articles")
     plt.title("Histogramme d'articles par date")
-    ax = plt.gca()
-    ax.axes.xaxis.set_visible(False)
+    if(len(liste_dates_intervalle) > 4):
+        plt.xticks(range(0,len(liste_dates_intervalle),int(len(liste_dates_intervalle)/4)),liste_dates_intervalle[::int(len(liste_dates_intervalle)/4)])
+    else:
+        plt.xticks(range(0,len(liste_dates_intervalle)),liste_dates_intervalle)
+    plt.savefig('miniprojet/static/images/graph.png')
+    plt.clf()
 
-    buffer = BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    image_png = buffer.getvalue()
-    buffer.close()
-
-    data_uri = base64.b64encode(image_png).decode('utf-8')
-    img_tag = f'<img src="data:image/png;base64,{data_uri}"/>'
-
-    return render(request, 'resultat_date_histogramme.html', {'img_tag': img_tag})
+    return render(request, 'resultat_date_histogramme.html')
 
 def index62(request):
     all_dates = dates.objects.all()
     dates_qs = all_dates
+
     for i in dict (request.GET):
         if i == 'date_debut':
             date_debut = request.GET.get('date_debut')
@@ -498,7 +519,7 @@ def index62(request):
     format1 = "%Y-%m-%d"
     format2 = "%Y-%m"
     format3 = "%Y"
-
+        
     if (len(date_debut) > 7):
         date_1 = datetime.strptime(date_debut, format1)
     elif(len(date_debut) <= 7 and len(date_debut) > 4):
@@ -518,17 +539,19 @@ def index62(request):
         liste_dates_intervalle = []
         for i in range(intervalle):
             liste_dates_intervalle.append(datetime.strftime(date_1 + timedelta(i), format1))
+
     elif(len(date_debut) <= 7 and len(date_debut) > 4):
-        intervalle = date_2.month - date_1.month + 1
+        intervalle = (date_2.year -date_1.year) *12 + date_2.month - date_1.month + 1
         liste_dates_intervalle = []
         liste_dates_intervalle.append(date_debut)
         for i in range(1,intervalle):
             date = datetime.strptime(liste_dates_intervalle[i-1], format2)
             if(date.month >= 12):
-                a = date.replace(year=date.year+1,month=1)
+                date.replace(year=date.year+1,month=1)
             else :
-                a = date.replace(month=date.month+1)
-            liste_dates_intervalle.append(datetime.strftime(a, format2))
+                date.replace(month=date.month+1)
+            liste_dates_intervalle.append(datetime.strftime(date, format2))
+
     else :
         intervalle = date_2.year - date_1.year + 1
         liste_dates_intervalle = []
@@ -538,6 +561,7 @@ def index62(request):
     dates_qs = dates_qs.filter(Q(Q(date__in=liste_dates_intervalle)))
 
     dates_qs = dates_qs.order_by('date')
+    
 
     return render(request,'resultat_date_tableau.html',{
         'all_dates' : all_dates,
@@ -549,3 +573,9 @@ def index63(request):
 
 def index64(request):
     return render(request,'entree_dates_tableau.html')
+
+def index65(request):
+    return render(request,'entree_mois_histogramme.html')
+
+def index66(request):
+    return render(request,'entree_annee_histogramme.html')
