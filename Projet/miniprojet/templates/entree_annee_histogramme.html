@@ -21,13 +21,13 @@
     <form action = "{% url 'index61' %}", method="get", name="search_form">
       {% csrf_token %}
       <div>
-        <label for="date_debut">Date de début : </label>
-        <input type="text" name="date_debut">
+        <label for="date_debut">Année de début : </label>
+        <input type="text" name="date_debut" placeholder="yyyy">
         {{form.date_debut}}
       </div>
       <div>
-        <label for="date_fin">Date de fin : </label>
-        <input type="text" name="date_fin">
+        <label for="date_fin">Année de fin : </label>
+        <input type="text" name="date_fin" placeholder="yyyy">
         {{form.date_fin}}
       </div>
       <h2> </h2>
